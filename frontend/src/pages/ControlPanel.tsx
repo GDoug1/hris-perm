@@ -544,8 +544,7 @@ const deleteUser = async (id: number) => {
             <div className="control-panel-modal-overlay">
 
               <div className="control-panel-modal">
-
-                <h3>{selectedRole.role_name}</h3>
+                <h3 className="control-panel-modal-title">{selectedRole.role_name}</h3>
 
                 <div className="control-panel-permission-list">
 
@@ -554,7 +553,7 @@ const deleteUser = async (id: number) => {
                     .filter((value, index, self) => self.indexOf(value) === index)
                     .map((permission) => (
 
-                      <label key={permission}>
+                      <label key={permission} className="control-panel-permission-row">
 
                         <input
                           type="checkbox"
@@ -600,14 +599,13 @@ const deleteUser = async (id: number) => {
             <div className="control-panel-modal-overlay">
 
               <div className="control-panel-modal">
-
-                <h3>{selectedUser.fullName}</h3>
+                <h3 className="control-panel-modal-title">{selectedUser.fullName}</h3>
 
                 <div className="control-panel-permission-list">
 
                   {userPermissions.map((perm) => (
 
-                    <label key={perm.permission_id}>
+                    <label key={perm.permission_id} className="control-panel-permission-row">
 
                       <input
                         type="checkbox"
