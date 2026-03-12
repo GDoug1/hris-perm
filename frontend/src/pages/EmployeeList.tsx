@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import Sidebar from '../components/Navbar/Sidebar';
+import DashboardSidebar from '../components/DashboardSidebar';
 import Header from '../components/Employee/Header';
 import SearchBar from '../components/Employee/SearchBar';
 import EmployeeTable from '../components/Employee/EmployeeTable';
@@ -183,7 +183,7 @@ const EmployeeList = () => {
 
   return (
     <div className="employee-list-layout">
-      <Sidebar />
+      <DashboardSidebar />
 
       <main className="employee-list-content">
         <Header

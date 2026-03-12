@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Sidebar from '../components/Navbar/Sidebar';
+import DashboardSidebar from '../components/DashboardSidebar';
 import AttendanceDetailsModal from '../components/AttendanceDetailsModal';
 import '../styles/attendance.css';
 
@@ -67,7 +67,7 @@ const Attendance = () => {
   // ======================
   return (
     <div className="attendance-page">
-      <Sidebar />
+      <DashboardSidebar />
 
       <main className="attendance-main">
         {/* Header */}
