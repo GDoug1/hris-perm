@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Sidebar from "../components/Navbar/Sidebar";
+import DashboardSidebar from "../components/DashboardSidebar";
 import "../styles/ControlPanel.css";
 
 /* =========================
@@ -309,7 +309,7 @@ const deleteUser = async (id: number) => {
   return (
     <div className="control-panel-layout">
 
-      <Sidebar />
+      <DashboardSidebar />
 
       <div className="control-panel-main">
         <div className="control-panel-container">

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import '../styles/dashboard.css';
-import Sidebar from '../components/Navbar/Sidebar';
+import DashboardSidebar from '../components/DashboardSidebar';
 
 type AttendanceToday = {
   attendance_id: number;
@@ -215,7 +215,7 @@ const formatDuration = (seconds: number) => {
   // ======================
   return (
     <div className="dashboard">
-      <Sidebar />
+      <DashboardSidebar />
 
       <main className="main">
         <div className="header">

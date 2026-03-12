@@ -1,10 +1,10 @@
 import '../styles/team.css';
-import Sidebar from '../components/Navbar/Sidebar';
+import DashboardSidebar from '../components/DashboardSidebar';
 
 const Team = () => {
   return (
     <div className="team-page">
-      <Sidebar />
+      <DashboardSidebar />
 
       <main className="team-main">
         {/* Header */}

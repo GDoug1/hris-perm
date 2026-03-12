@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-import Sidebar from "../components/Navbar/Sidebar";
+import DashboardSidebar from "../components/DashboardSidebar";
 import SearchBar from "../components/Employee/SearchBar";
 import EmployeeScheduleTable from "../components/EmployeeScheduleTable";
 import AddEmployeeModal from "../components/Employee/AddEmployeeModal"; // ✅ correct modal
@@ -109,7 +109,7 @@ const Schedule = () => {
 
   return (
     <div className="layout">
-      <Sidebar />
+      <DashboardSidebar />
 
       <main className="content">
 
