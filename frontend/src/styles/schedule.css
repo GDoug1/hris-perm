@@ -1,0 +1,186 @@
+/* ===============================
+   PAGE LAYOUT
+=================================*/
+
+.layout {
+  display: flex;
+  height: 100vh;
+  background: #f4f6f9;
+}
+
+.content {
+  flex: 1;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ===============================
+   TOOLBAR
+=================================*/
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* ===============================
+   TABLE WRAPPER
+=================================*/
+
+.schedule-table-wrapper {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+  overflow: auto;
+}
+
+/* ===============================
+   TABLE STYLE
+=================================*/
+
+.schedule-employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.schedule-employee-table thead {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.schedule-employee-table thead th {
+  padding: 14px;
+  text-align: left;
+  position: sticky;
+  top: 0;
+  background: #2563eb;
+  z-index: 5;
+}
+
+.schedule-employee-table tbody tr {
+  border-bottom: 1px solid #f1f1f1;
+  transition: background 0.2s ease;
+}
+
+.schedule-employee-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.schedule-employee-table td {
+  padding: 12px 14px;
+  color: #374151;
+}
+
+/* ===============================
+   BUTTONS
+=================================*/
+
+.btn-set {
+  background: #10b981;
+  color: #ffffff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn-set:hover {
+  background: #059669;
+}
+
+.btn-view {
+  background: #e5e7eb;
+  color: #111827;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn-view:hover {
+  background: #d1d5db;
+}
+
+/* ===============================
+   TOAST
+=================================*/
+
+.toast {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  animation: fadeIn 0.25s ease;
+}
+
+.toast.success {
+  background: #10b981;
+}
+
+.toast.error {
+  background: #ef4444;
+}
+
+/* ===============================
+   FILTER BUTTON
+=================================*/
+
+.filter-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 7px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.filter-btn:hover {
+  background: #1d4ed8;
+}
+
+/* ===============================
+   MODAL ANIMATION
+=================================*/
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===============================
+   RESPONSIVE
+=================================*/
+
+@media (max-width: 900px) {
+  .content {
+    padding: 15px;
+  }
+
+  .employee-table {
+    font-size: 12px;
+  }
+}

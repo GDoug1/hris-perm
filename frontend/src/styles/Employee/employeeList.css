@@ -1,0 +1,296 @@
+.employee-list-layout {
+  display: flex;
+  height: 100vh;
+  background: #f8fafc;
+}
+
+.employee-list-content {
+  flex: 1;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;   /* 🔥 add this */
+  z-index: 1;           /* 🔥 add this */
+}
+
+
+/* ================= TOOLBAR ================= */
+.employee-list-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.employee-list-toolbar .search-bar input {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #f1f5f9;
+}
+
+/* ================= TABLE ================= */
+.employee-table-wrapper {
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: auto;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #1e90ff;
+  position: relative;
+}
+
+.employee-table {
+  width: 100%;
+  min-width: 1400px;
+  border-collapse: collapse;
+}
+
+.employee-table thead th {
+  position: sticky;
+  top: 0;
+  background: #1e90ff;
+  color: white;
+  padding: 10px;
+  font-size: 12px;
+  z-index: 2;   /* add */
+}
+
+.employee-table td {
+  padding: 10px;
+  font-size: 13px;
+}
+
+.employee-table tbody tr {
+  border-bottom: 1px solid #eee;
+}
+
+.employee-table tbody tr:nth-child(even) {
+  background: #f7f7f7;
+}
+
+.employee-table tbody tr:hover {
+  background: #eaf4ff;
+}
+
+/* ================= CARD VIEW ================= */
+.employee-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.employee-card {
+  background: white;
+  border-radius: 12px;
+  padding: 18px;
+  border: 2px solid #1e90ff;
+  display: flex;
+  gap: 15px;
+}
+
+.employee-avatar {
+  width: 60px;
+  height: 60px;
+  background: #1e90ff;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.employee-card-info h4 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.employee-card-info p {
+  margin: 3px 0;
+  font-size: 13px;
+  color: #555;
+}
+
+/* ================= ACTION BUTTONS ================= */
+.employee-action-cell {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.employee-btn-edit {
+  background: #1e90ff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.employee-btn-edit:hover {
+  background: #187bcd;
+}
+
+.employee-btn-delete {
+  background: #ff4444;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.employee-btn-delete:hover {
+  background: #e03e3e;
+}
+
+.employee-btn-view {
+  background: #e5e7eb;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.employee-btn-view:hover {
+  background: #d1d5db;
+}
+
+
+
+
+.employee-table th {
+  cursor: pointer;
+  user-select: none;
+}
+
+.filter-btn {
+  background: #1e90ff;
+  color: white;
+  border: none;
+  padding: 7px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.filter-btn:hover {
+  background: #1d4ed8;
+}
+
+.employee-view-toggle {
+  display: flex;
+  gap: 8px;
+}
+
+.employee-view-toggle button {
+  background: #e5e7eb;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.employee-view-toggle button:hover{
+  background: #d1d5db;
+
+}
+
+.employee-view-toggle button.active {
+  background: #1e90ff;
+  color: white;
+}
+
+/* ===== Sticky ID ===== */
+.employee-sticky-id {
+  position: sticky;
+  left: 0;
+  width: 70px;
+  min-width: 70px;
+  background: #fff;
+  z-index: 4;
+}
+
+/* ===== Sticky NAME ===== */
+.employee-sticky-name {
+  position: sticky;
+  left: 70px;
+  width: 220px;
+  min-width: 220px;
+  background: #fff;
+  z-index: 4;
+}
+
+/* ===== Sticky ACTION (right side) =====
+.employee-sticky-action {
+  position: sticky;
+  right: 0;
+  width: 130px;
+  min-width: 130px;
+  background: #fff;
+  z-index: 4;
+} */
+
+/* Maintain row color pattern */
+.employee-table tbody tr:nth-child(even) .employee-sticky-id,
+.employee-table tbody tr:nth-child(even) .employee-sticky-name,
+.employee-table tbody tr:nth-child(even) .employee-sticky-action {
+  background: #f7f7f7;
+}
+
+/* Header styling */
+.employee-table thead .employee-sticky-id,
+.employee-table thead .employee-sticky-name,
+.employee-table thead .employee-sticky-action {
+  background: #1e90ff;
+  color: white;
+  z-index: 6;
+}
+
+
+.employee-table thead .employee-sticky-action {
+  background: #1e90ff;
+  color: white;
+}
+
+.employee-sticky-name {
+  box-shadow: 3px 0 6px rgba(0,0,0,0.08);
+}
+
+
+/* HEADER CSS */
+.employee-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.employee-list-content .add-employee-btn {
+  background: #1e90ff;
+  color: white;
+  border-radius: 8px;
+  padding: 8px 14px;
+  border: none;
+  cursor: pointer;
+}
+
+.employee-list-content .add-employee-btn:hover {
+  background: #187bcd;
+}
+
+.employee-list-content .export-btn {
+  background: #e5e7eb;
+  border-radius: 8px;
+  padding: 8px 14px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.employee-list-content .export-btn:hover {
+  background: #d1d5db;
+}

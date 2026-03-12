@@ -1,0 +1,72 @@
+/* ================= OVERLAY ================= */
+.employee-info-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5000;
+}
+
+/* ================= MODAL ================= */
+.employee-info-modal-container {
+  width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+}
+
+/* ================= TITLE ================= */
+.employee-info-modal-title {
+  margin-bottom: 15px;
+}
+
+/* ================= GRID ================= */
+.employee-info-modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ================= FIELD ================= */
+.employee-info-modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.employee-info-modal-field strong {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.employee-info-modal-field p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ================= ACTIONS ================= */
+.employee-info-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+/* ================= BUTTON ================= */
+.employee-info-modal-close-btn {
+  background: #1e90ff;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.employee-info-modal-close-btn:hover {
+  background: #187bcd;
+}

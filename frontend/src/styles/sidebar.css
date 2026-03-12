@@ -1,0 +1,156 @@
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  flex-shrink: 0;
+  background: #fff;
+  border-right: 1px solid #e5e7eb;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.sidebar-logo {
+  width: 20vh;
+  height: auto;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 0;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;        /* 🔥 makes it a circle */
+  overflow: hidden;         /* 🔥 crops the image */
+  background: #e5e7eb;       /* fallback bg */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+  border: 3px solid #3b82f6; /* optional blue ring */
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* 🔥 prevents stretching */
+}
+
+.name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+.logout {
+  margin-top: 0.5rem;
+}
+
+
+.profile {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.profile .name{
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+.profile .logout{
+  margin-top: 10px;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  background: #FF4444;
+  padding: 5px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.menu :link{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+}
+
+.menu a {
+  display: block;
+  padding: 12px;
+  margin: 6px 0;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.menu a:hover {
+  background: #e6f0ff;
+}
+
+.menu a.active {
+  background: #1e90ff;
+  color: #fff;
+}
+.menu a.active:hover {
+  background: #1c86ee;
+}
+
+/* Dropdown container */
+.dropdown {
+  margin: 6px 0;
+}
+
+/* Dropdown header */
+.dropdown-header {
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s ease;
+}
+
+.dropdown-header:hover {
+  background: #e6f0ff;
+}
+
+/* Arrow animation */
+.arrow {
+  font-size: 12px;
+  transition: transform 0.2s ease;
+}
+
+.arrow.open {
+  transform: rotate(180deg);
+}
+
+/* Dropdown content */
+.dropdown-content {
+  padding-left: 15px;
+}
+
+.dropdown-content a {
+  padding: 10px 12px;
+  margin: 4px 0;
+}
+
+
+
+@media (max-width: 980px){
+  .sidebar {
+    width: 100%;
+    height: auto;
+  }
+}
