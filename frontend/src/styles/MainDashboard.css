@@ -1,430 +1,175 @@
-/* =========================================
-   MAIN DASHBOARD LAYOUT
-========================================= */
+/* Main Dashboard CSS */
 
-.md-layout{
-  display:flex;
-  height:100vh;
-  width:100%;
-  background:#f5f5f5;
-  overflow:hidden;
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  width: 100%;
+  background: #f5f5f5;
+  color: #111;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
 }
 
-.md-main{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  padding:18px;
-  overflow-y:auto;
+.app-shell > .content {
+  flex: 1;
+  align-self: stretch;
+  width: 100%;
+  padding: 18px;
+  background: #f5f5f5;
 }
 
-
-/* =========================================
-   HEADER
-========================================= */
-
-.md-header{
-  display:flex;
-  justify-content:flex-end;
-  align-items:center;
-  margin-bottom:14px;
-}
-
-.md-datetime{
-  font-size:12px;
-  letter-spacing:0.8px;
-  font-weight:500;
-}
-
-
-/* =========================================
-   GRID LAYOUT
-========================================= */
-
-.md-grid{
-  display:grid;
-  width:100%;
-  grid-template-columns:1.35fr 1.1fr 1.1fr;
-
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1.1fr 1.1fr;
   grid-template-areas:
     "time announcement announcement"
     "shift calendar holiday"
     "summary summary member";
-
-  column-gap:10px;
-  row-gap:10px;
+  column-gap: 8px;
+  row-gap: 6px;
+  align-items: start;
 }
 
-.md-grid.md-no-member{
+.dashboard-grid.no-member-status {
   grid-template-areas:
     "time announcement announcement"
     "shift calendar holiday"
     "summary summary summary";
 }
 
-.md-grid.md-has-member{
+.dashboard-grid.has-member-status {
   grid-template-areas:
     "time announcement announcement"
     "shift calendar holiday"
     "summary summary member";
 }
 
-
-/* =========================================
-   CARD BASE
-========================================= */
-
-.md-card{
-  background:#d4d4d4;
-  border:1px solid #cecece;
-  border-radius:8px;
-  padding:12px;
-  box-shadow:0 2px 6px rgba(0,0,0,0.16);
-  box-sizing:border-box;
+.dashboard-grid > .card {
+  background: #d4d4d4;
+  border: 1px solid #cecece;
+  padding: 12px;
+  min-height: 70px;
+  margin-bottom: 0;
+  display: block;
+  box-sizing: border-box;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.md-card-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-size:13px;
-  font-weight:500;
+@media (min-width: 1201px) {
+  .dashboard-grid {
+    grid-template-rows: 190px 168px minmax(112px, auto);
+    align-items: stretch;
+    align-content: start;
+  }
+
+  .dashboard-grid .time-card,
+  .dashboard-grid .announcement-card,
+  .dashboard-grid .shift-card,
+  .dashboard-grid .calendar-card,
+  .dashboard-grid .holiday-card,
+  .dashboard-grid .summary-card,
+  .dashboard-grid .member-card {
+    height: auto;
+    min-height: 0;
+  }
+
+  .dashboard-grid .summary-card {
+    display: flex;
+    align-content: center;
+  }
 }
 
+@media (min-width: 1400px) {
+  .app-shell > .content {
+    padding: 22px;
+  }
 
-/* =========================================
-   TIME CARD
-========================================= */
+  .dashboard-grid {
+    grid-template-columns: 1.35fr 1.12fr 1.12fr;
+    grid-template-rows: 236px 176px minmax(148px, auto);
+    column-gap: 12px;
+    row-gap: 12px;
+  }
 
-.md-time-card{
-  grid-area:time;
-  height:190px;
-  padding:0;
-  background:#ececec;
+  .dashboard-grid .card {
+    padding: 14px;
+  }
+
+  .dashboard-grid .time-counter {
+    font-size: 48px;
+  }
+
+  .dashboard-grid .value,
+  .dashboard-grid .big-value {
+    font-size: 40px;
+  }
 }
 
-.md-time-panel{
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-start;
-  gap:10px;
-  padding:12px 14px;
+@media (min-width: 1700px) {
+  .app-shell > .content {
+    padding: 24px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1.36fr 1.14fr 1.14fr;
+    grid-template-rows: 266px 194px minmax(160px, auto);
+    column-gap: 14px;
+    row-gap: 12px;
+  }
+
+  .dashboard-grid .card {
+    padding: 16px;
+  }
+
+  .dashboard-grid .time-counter {
+    font-size: 54px;
+  }
+
+  .dashboard-grid .value,
+  .dashboard-grid .big-value {
+    font-size: 44px;
+  }
 }
 
-.md-time-counter{
-  text-align:center;
-  font-size:42px;
-  font-weight:800;
-  letter-spacing:1px;
-}
+@media (max-width: 1200px) {
+  .app-shell > .content {
+    padding: 14px;
+  }
 
-.md-time-in-btn{
-  width:94px;
-  height:32px;
-  margin:2px auto 0;
-  border:none;
-  border-radius:8px;
-  background:#3f7ff1;
-  color:#fff;
-  font-size:12px;
-  font-weight:700;
-  cursor:pointer;
-  box-shadow:0 4px 8px rgba(63,127,241,0.24);
-}
-
-.md-time-in-btn:disabled{
-  opacity:.6;
-  cursor:not-allowed;
-  box-shadow:none;
-}
-
-.md-time-complete-message{
-  margin:6px auto 0;
-  font-size:13px;
-  font-weight:600;
-  color:#1b3d76;
-}
-
-
-/* =========================================
-   ANNOUNCEMENT CARD
-========================================= */
-
-.md-announcement-card{
-  grid-area:announcement;
-  height:190px;
-  position:relative;
-  background:linear-gradient(180deg,#d8d8d8 0%,#d2d2d2 100%);
-}
-
-.md-pill-btn{
-  border:none;
-  border-radius:999px;
-  background:#efefef;
-  font-size:10px;
-  padding:3px 9px;
-  cursor:pointer;
-}
-
-.md-list-items{
-  list-style:none;
-  padding:0;
-  margin-top:10px;
-  font-size:12px;
-}
-
-.md-mini-actions{
-  position:absolute;
-  right:10px;
-  bottom:8px;
-  font-size:12px;
-}
-
-
-/* =========================================
-   SHIFT CARD
-========================================= */
-
-.md-shift-card{
-  grid-area:shift;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.md-shift-day-name{
-  font-size:11px;
-  color:#4a4a4a;
-  font-weight:600;
-}
-
-.md-shift-columns{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-
-.md-shift-stat{
-  background:rgba(255,255,255,0.28);
-  border:1px solid rgba(255,255,255,0.45);
-  border-radius:10px;
-  padding:8px 10px;
-}
-
-.md-label{
-  font-size:12px;
-  margin-bottom:4px;
-}
-
-.md-value{
-  font-size:38px;
-  font-weight:800;
-}
-
-.md-shift-meta{
-  display:flex;
-  gap:8px;
-  margin-top:8px;
-}
-
-.md-shift-meta-pill{
-  border-radius:999px;
-  background:#d9e5f9;
-  color:#1b407e;
-  font-size:11px;
-  font-weight:700;
-  padding:3px 10px;
-}
-
-.md-shift-meta-break{
-  font-size:12px;
-}
-
-
-/* =========================================
-   CALENDAR CARD
-========================================= */
-
-.md-calendar-card{
-  grid-area:calendar;
-  height:200px;
-}
-
-.md-calendar-month{
-  font-size:10px;
-  color:#4b4b4b;
-}
-
-.md-calendar-grid{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:3px;
-  margin-top:6px;
-}
-
-.md-calendar-cell{
-  font-size:10px;
-  text-align:center;
-  padding:4px 0;
-  border-radius:4px;
-}
-
-.md-calendar-cell.header{
-  font-weight:700;
-  background:#cfcfcf;
-}
-
-.md-calendar-cell.today{
-  background:#4482e5;
-  color:#fff;
-  font-weight:700;
-}
-
-.md-calendar-cell.muted{
-  color:#777;
-}
-
-
-/* =========================================
-   HOLIDAY CARD
-========================================= */
-
-.md-holiday-card{
-  grid-area:holiday;
-  height:200px;
-  position:relative;
-}
-
-.md-holiday-list{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-  margin-top:8px;
-}
-
-.md-plus{
-  font-weight:700;
-}
-
-
-/* =========================================
-   SUMMARY CARD
-========================================= */
-
-.md-summary-card{
-  grid-area:summary;
-  display:grid;
-  grid-template-columns:1.3fr 1fr 1fr;
-  gap:14px;
-  align-items:center;
-}
-
-.md-summary-section{
-  min-width:0;
-}
-
-.md-summary-list{
-  display:grid;
-  gap:4px;
-}
-
-.md-summary-row{
-  display:flex;
-  justify-content:space-between;
-  font-size:13px;
-}
-
-.md-big-value{
-  font-size:34px;
-  font-weight:800;
-}
-
-.md-summary-tag{
-  margin-top:4px;
-  border-radius:999px;
-  background:#e7edf9;
-  color:#1b3d76;
-  font-size:11px;
-  padding:3px 10px;
-}
-
-
-/* =========================================
-   MEMBER STATUS CARD
-========================================= */
-
-.md-member-card{
-  grid-area:member;
-  display:flex;
-  flex-direction:column;
-}
-
-.md-member-title{
-  font-size:13px;
-  margin-bottom:6px;
-}
-
-.md-request-list{
-  border-top:1px solid #bfbfbf;
-  padding-top:6px;
-}
-
-.md-request-row{
-  display:grid;
-  grid-template-columns:1fr auto auto;
-  gap:6px;
-  font-size:10px;
-}
-
-.md-requesting{
-  color:#ec2f2f;
-  font-weight:700;
-}
-
-.md-view-btn{
-  border:none;
-  border-radius:10px;
-  background:#efefef;
-  font-size:9px;
-  padding:3px 9px;
-  cursor:pointer;
-}
-
-
-/* =========================================
-   RESPONSIVE
-========================================= */
-
-@media (max-width:1200px){
-
-  .md-grid{
-    grid-template-columns:repeat(2,1fr);
+  .dashboard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-areas:
       "time announcement"
       "shift calendar"
       "summary member"
       "holiday holiday";
+    column-gap: 8px;
+    row-gap: 8px;
   }
 
-  .md-grid.md-no-member{
+  .dashboard-grid.no-member-status {
     grid-template-areas:
       "time announcement"
       "shift calendar"
       "summary summary"
       "holiday holiday";
   }
-
 }
 
-@media (max-width:980px){
-
-  .md-layout{
-    flex-direction:column;
+@media (max-width: 980px) {
+  .app-shell {
+    flex-direction: column;
   }
 
-  .md-grid{
-    grid-template-columns:1fr;
+  .app-shell > .content {
+    align-self: stretch;
+    padding: 10px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
     grid-template-areas:
       "time"
       "announcement"
@@ -433,10 +178,780 @@
       "holiday"
       "summary"
       "member";
+    column-gap: 0;
+    row-gap: 8px;
   }
 
-  .md-summary-card{
-    grid-template-columns:1fr;
+  .dashboard-grid.no-member-status {
+    grid-template-areas:
+      "time"
+      "announcement"
+      "shift"
+      "calendar"
+      "holiday"
+      "summary";
+  }
+  
+  .card {
+    padding: 10px;
+  }
+}
+
+
+/* AnnouncementCard.css */
+.announcement-card {
+  grid-area: announcement;
+  height: 190px;
+  position: relative;
+  background: linear-gradient(180deg, #d8d8d8 0%, #d2d2d2 100%);
+  padding-bottom: 28px;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.pill-btn {
+  border: none;
+  border-radius: 999px;
+  background: #efefef;
+  font-size: 10px;
+  padding: 3px 9px;
+  cursor: pointer;
+}
+
+.list-items {
+  margin: 10px 0 0;
+  padding-left: 0;
+  list-style: none;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+
+.announcement-list {
+  padding-right: 12px;
+  margin-bottom: 0;
+}
+
+.announcement-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  margin-bottom: 6px;
+}
+
+.announcement-tag {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 999px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.announcement-tag.meeting {
+  background: #3f7fe3;
+}
+
+.announcement-tag.reminder {
+  background: #5f83c4;
+}
+
+.announcement-tag.system {
+  background: #3d5a89;
+}
+
+.announcement-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #1f1f1f;
+}
+
+.announcement-meta {
+  font-size: 10px;
+  color: #4f4f4f;
+}
+
+.mini-actions {
+  position: absolute;
+  right: 10px;
+  bottom: 8px;
+  font-size: 12px;
+  color: #2f2f2f;
+  z-index: 1;
+}
+
+/* CalendarCard.css */
+.calendar-card {
+  grid-area: calendar;
+  height: 200px;
+  align-self: start;
+}
+
+.calendar-month {
+  font-size: 10px;
+  color: #4b4b4b;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+
+.calendar-grid.weekdays {
+  margin-top: 8px;
+}
+
+.calendar-grid.dates {
+  margin-top: 4px;
+}
+
+.calendar-cell {
+  font-size: 10px;
+  text-align: center;
+  padding: 4px 0;
+  border-radius: 4px;
+}
+
+.calendar-cell.header {
+  font-weight: 700;
+  background: #cfcfcf;
+}
+
+.calendar-cell.muted {
+  color: #777;
+}
+
+.calendar-cell.today {
+  background: #4482e5;
+  color: #fff;
+  font-weight: 700;
+}
+
+
+/* DashboardHeader.css */
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.dashboard-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  font-size: 35px;
+  letter-spacing: 0.5px;
+}
+
+.datetime {
+  font-size: 12px;
+  letter-spacing: 0.8px;
+  font-weight: 500;
+}
+
+@media (max-width: 980px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
   }
 
+  .dashboard-header h1 {
+    font-size: 28px;
+  }
+}
+
+
+/* HolidayCard.css */
+.holiday-card {
+  grid-area: holiday;
+  height: 200px;
+  position: relative;
+  padding-bottom: 28px;
+}
+
+.plus {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+
+.holiday-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 0;
+  max-height: 145px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.holiday-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 7px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.holiday-kind {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 999px;
+  color: #fff;
+}
+
+.holiday-kind.holiday {
+  background: #7d5ac8;
+}
+
+.holiday-kind.birthday {
+  background: #d4745d;
+}
+
+.holiday-label {
+  font-size: 11px;
+  font-weight: 600;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.holiday-date {
+  font-size: 10px;
+  color: #444;
+  white-space: nowrap;
+}
+
+
+@media (max-width: 980px) {
+  .holiday-card {
+    min-height: 210px;
+  }
+
+  .holiday-item {
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "kind label"
+      "date date";
+    gap: 4px 8px;
+  }
+
+  .holiday-kind {
+    grid-area: kind;
+  }
+
+  .holiday-label {
+    grid-area: label;
+  }
+
+  .holiday-date {
+    grid-area: date;
+    text-align: right;
+  }
+}
+
+
+/* MemberStatusCard.css */
+.member-card {
+  grid-area: member;
+  height: 112px;
+  display: flex;
+  flex-direction: column;
+}
+
+.member-title {
+  font-size: 13px;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+
+
+.member-line {
+  font-size: 10px;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 3px;
+}
+
+.member-status-text {
+  color: #333;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot.red {
+  background: #ed4040;
+}
+
+.dot.green {
+  background: #4cae3f;
+}
+
+.dot.black {
+  background: #111;
+}
+
+.request-list {
+  margin-top: auto;
+  border-top: 1px solid #bfbfbf;
+  padding-top: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.request-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+}
+
+.requesting {
+  color: #ec2f2f;
+  font-weight: 700;
+}
+
+.view-btn {
+  border: none;
+  border-radius: 10px;
+  background: #efefef;
+  font-size: 9px;
+  padding: 3px 9px;
+  cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+  .member-card {
+    min-height: 120px;
+  }
+}
+
+@media (max-width: 980px) {
+  .member-line,
+  .request-row {
+    font-size: 11px;
+  }
+
+  .member-title {
+    font-size: 14px;
+  }
+}
+
+
+/* ShiftCard.css */
+.shift-card {
+  grid-area: shift;
+  min-height: 106px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.shift-day-name {
+  font-size: 11px;
+  color: #4a4a4a;
+  font-weight: 600;
+}
+
+.shift-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  align-items: stretch;
+}
+
+.shift-stat {
+  background: rgba(255, 255, 255, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 10px;
+  padding: 8px 10px;
+}
+
+.label {
+  font-size: 12px;
+  margin-bottom: 4px; 
+}
+
+.value {
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.remaining {
+  text-align: center;
+  margin-top: 0;
+  font-size: 16px;
+}
+
+
+.shift-meta {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.shift-meta-pill {
+  border-radius: 999px;
+  background: #d9e5f9;
+  color: #1b407e;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+}
+
+.shift-meta-break {
+  font-size: 12px;
+}
+
+@media (max-width: 1200px) {
+  .value {
+    font-size: 30px;
+  }
+
+  .remaining {
+    font-size: 14px;
+  }
+
+  .shift-card {
+    min-height: 118px;
+  }
+}
+
+@media (max-width: 980px) {
+  .value {
+    font-size: 36px;
+  }
+
+  .remaining {
+    font-size: 16px;
+  }
+}
+
+
+/* SummaryCard.css */
+.summary-card {
+  grid-area: summary;
+  min-height: 150px;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 0;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+  border-radius: 24px;
+  padding: 12px;
+}
+
+.summary-section {
+  min-width: 0;
+  height: 100%;
+  padding: 8px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.summary-section + .summary-section {
+  border-left: 1px solid #e5e5e5;
+}
+
+.summary-list {
+  display: grid;
+  gap: 8px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 19px;
+}
+
+.summary-row strong {
+  font-weight: 700;
+}
+
+.summary-label {
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: #6d727a;
+}
+
+.small-info {
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.big-value {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.summary-status-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.summary-status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+}
+
+.summary-status-value.is-available .summary-status-dot {
+  background: #44c779;
+  box-shadow: 0 0 0 3px rgba(68, 199, 121, 0.22);
+}
+
+.summary-status-value.is-unavailable .summary-status-dot {
+  background: #e04f5f;
+  box-shadow: 0 0 0 3px rgba(224, 79, 95, 0.22);
+}
+
+.summary-status-value.is-unavailable {
+  color: #141414;
+}
+
+
+.summary-tag {
+  margin-top: 14px;
+  display: inline-flex;
+  border-radius: 999px;
+  background: #dff3e5;
+  color: #2d7d4f;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 6px 14px;
+  align-self: flex-start;
+}
+
+@media (max-width: 1200px) {
+  .big-value {
+    font-size: 52px;
+  }
+
+  .summary-row {
+    font-size: 16px;
+  }
+
+  .summary-card {
+    min-height: 120px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 980px) {
+  .summary-card {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    align-items: start;
+  }
+
+  .summary-row {
+    font-size: 13px;
+  }
+
+  .big-value {
+    font-size: 40px;
+  }
+
+  .summary-section + .summary-section {
+    border-left: 0;
+    border-top: 1px solid #e5e5e5;
+  }
+}
+
+/* TimeCard.css */
+.time-card {
+  grid-area: time;
+  height: 190px;
+  padding: 0;
+  background: #ececec;
+  overflow: hidden;
+}
+
+.time-panel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+}
+
+.time-counter {
+  text-align: center;
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.time-in-btn {
+  width: 94px;
+  height: 32px;
+  margin: 2px auto 0;
+  border: none;
+  border-radius: 8px;
+  background: #3f7ff1;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 4px 8px rgba(63, 127, 241, 0.24);
+  cursor: pointer;
+}
+
+.time-in-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.time-complete-message {
+  margin: 6px auto 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1b3d76;
+  text-align: center;
+}
+
+
+.time-tag-list {
+  margin-top: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.time-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: #e7edf9;
+  color: #1b3d76;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+}
+
+.time-out-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 16, 40, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.time-out-modal {
+  width: min(92vw, 360px);
+  border-radius: 12px;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.25);
+}
+
+.time-out-modal h3 {
+  margin: 0;
+  font-size: 20px;
+  color: #0d1737;
+}
+
+.time-out-modal p {
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: #39415f;
+}
+
+.time-out-modal-actions {
+  margin-top: 18px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.time-out-cancel-btn,
+.time-out-confirm-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.time-out-cancel-btn {
+  background: #eceff7;
+  color: #21305f;
+}
+
+.time-out-confirm-btn {
+  background: #3f7ff1;
+  color: #fff;
+}
+
+@media (max-width: 1200px) {
+  .time-card {
+    height: auto;
+    min-height: 180px;
+  }
+
+  .time-counter {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 980px) {
+  .time-panel {
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .time-counter {
+    font-size: 32px;
+  }
 }
