@@ -366,7 +366,7 @@ export default function MainDashboard({
 
 
   const sidebarNavItems = useMemo(() => {
-    const isDashboard = location.pathname === "/dashboard";
+    const isDashboard = ["/dashboard", "/main-dashboard"].includes(location.pathname);
     const isTeam = location.pathname === "/team";
     const isAttendance = location.pathname === "/attendance";
     const isSchedule = location.pathname === "/schedule";
@@ -374,7 +374,7 @@ export default function MainDashboard({
     const isControlPanel = location.pathname === "/ControlPanel";
 
     return [
-      { label: "Dashboard", active: isDashboard, to: "/dashboard" },
+      { label: "Dashboard", active: isDashboard, to: "/main-dashboard" },
       { label: "Team", active: isTeam, to: "/team" },
       { label: "Attendance", active: isAttendance, to: "/attendance" },
       { label: "Schedule", active: isSchedule, to: "/schedule" },

@@ -39,6 +39,15 @@ function App() {
       />
 
       <Route
+        path="/main-dashboard"
+        element={
+          <ProtectedRoute>
+            <MainDashboard />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
         path="/team"
         element={
           <ProtectedRoute>

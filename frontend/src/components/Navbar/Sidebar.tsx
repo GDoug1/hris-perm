@@ -178,7 +178,7 @@ const Sidebar = ({ avatar, roleLabel, userName, navItems, onLogout }: SidebarPro
 
       <nav className="menu">
         {hasPermission('View Dashboard') && (
-          <NavLink to="/dashboard" className={({ isActive }) => (isActive ? 'active' : '')}>
+          <NavLink to="/main-dashboard" className={({ isActive }) => (isActive ? 'active' : '')}>
             Dashboard
           </NavLink>
         )}
