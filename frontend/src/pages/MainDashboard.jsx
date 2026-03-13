@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
 import "../styles/MainDashboard.css";
 import Sidebar from "../components/Navbar/Sidebar";
 
@@ -269,6 +270,7 @@ export default function MainDashboard({
   const [timeInStart, setTimeInStart] = useState(null);
   const [now, setNow] = useState(new Date());
   const [isTimeOutConfirmOpen, setIsTimeOutConfirmOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const timer = setInterval(() => setNow(new Date()), 1000);
@@ -362,6 +364,25 @@ export default function MainDashboard({
     return (diffInSeconds / 3600).toFixed(1);
   }, [activeTimeIn, activeTimeOut, now]);
 
+
+  const sidebarNavItems = useMemo(() => {
+    const isDashboard = ["/dashboard", "/main-dashboard"].includes(location.pathname);
+    const isTeam = location.pathname === "/team";
+    const isAttendance = location.pathname === "/attendance";
+    const isSchedule = location.pathname === "/schedule";
+    const isEmployees = location.pathname === "/employee-list";
+    const isControlPanel = location.pathname === "/ControlPanel";
+
+    return [
+      { label: "Dashboard", active: isDashboard, to: "/main-dashboard" },
+      { label: "Team", active: isTeam, to: "/team" },
+      { label: "Attendance", active: isAttendance, to: "/attendance" },
+      { label: "Schedule", active: isSchedule, to: "/schedule" },
+      { label: "Employees", active: isEmployees, to: "/employee-list" },
+      { label: "Control Panel", active: isControlPanel, to: "/ControlPanel" },
+    ];
+  }, [location.pathname]);
+
   const onToggleTimeIn = () => {
     if (hasActiveTimeIn) {
       setIsTimeOutConfirmOpen(true);
@@ -373,7 +394,7 @@ export default function MainDashboard({
 
   return (
     <div className="md-layout">
-      <Sidebar />
+      <Sidebar navItems={sidebarNavItems} roleLabel="Dashboard" userName="Main dashboard" />
 
       <div className="md-main">
         <DashboardHeader
