@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import "../styles/MainDashboard.css";
-import Sidebar from "../components/Navbar/sidebar";
+import Sidebar from "../components/Navbar/Sidebar";
 
 function DashboardHeader({ headerTime, headerDate }) {
   return (
