@@ -5,6 +5,7 @@ import '../../styles/sidebar.css';
 export type SidebarNavChild = {
   label: string;
   active?: boolean;
+  to?: string;
   onClick?: () => void;
 };
 
@@ -12,6 +13,7 @@ export type SidebarNavItem = {
   label: string;
   active?: boolean;
   expanded?: boolean;
+  to?: string;
   onClick?: () => void;
   children?: SidebarNavChild[];
 };
@@ -99,7 +101,14 @@ const Sidebar = ({ avatar, roleLabel, userName, navItems, onLogout }: SidebarPro
 
             return (
               <div key={item.label} className="nav-group">
-                {item.onClick ? (
+                {item.to ? (
+                  <NavLink className={className} to={item.to}>
+                    <span>{item.label}</span>
+                    {hasChildren ? (
+                      <span className="nav-caret">{item.expanded ? '▾' : '▸'}</span>
+                    ) : null}
+                  </NavLink>
+                ) : item.onClick ? (
                   <button className={className} type="button" onClick={item.onClick}>
                     <span>{item.label}</span>
                     {hasChildren ? (
@@ -119,6 +128,18 @@ const Sidebar = ({ avatar, roleLabel, userName, navItems, onLogout }: SidebarPro
                   <div className="nav-submenu" role="group" aria-label={`${item.label} submenu`}>
                     {item.children?.map((child) => {
                       const childClassName = `nav-subitem${child.active ? ' active' : ''}`;
+
+                      if (child.to) {
+                        return (
+                          <NavLink
+                            key={`${item.label}-${child.label}`}
+                            className={childClassName}
+                            to={child.to}
+                          >
+                            {child.label}
+                          </NavLink>
+                        );
+                      }
 
                       return (
                         <button
