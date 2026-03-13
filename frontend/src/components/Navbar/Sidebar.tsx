@@ -35,14 +35,8 @@ const Sidebar = ({ avatar, roleLabel, userName, navItems, onLogout }: SidebarPro
   const location = useLocation();
   const [user, setUser] = useState<User | null>(null);
 
-  const employeeRoutes = ['/schedule', '/employee-list'];
-  const managementRoutes = ['/employee-list', '/ControlPanel'];
-
-  const isEmployeeRoute = employeeRoutes.includes(location.pathname);
-  const isManagementRoute = managementRoutes.includes(location.pathname);
-
-  const [employeeOpen, setEmployeeOpen] = useState(isEmployeeRoute);
-  const [managementOpen, setManagementOpen] = useState(isManagementRoute);
+  const isAttendanceRoute = location.pathname === '/attendance';
+  const [attendanceOpen, setAttendanceOpen] = useState(isAttendanceRoute);
 
   useEffect(() => {
     fetch('http://localhost/hris/backend/control_panel/get_user.php', {
@@ -79,6 +73,11 @@ const Sidebar = ({ avatar, roleLabel, userName, navItems, onLogout }: SidebarPro
   };
 
   const isCustomSidebar = Array.isArray(navItems) && navItems.length > 0;
+
+  const getInitials = () => {
+    const base = user?.first_name?.trim() || userName?.trim() || 'AD';
+    return base.slice(0, 2).toUpperCase();
+  };
 
   const renderCustomNav = () => {
     if (!isCustomSidebar) return null;
@@ -148,18 +147,12 @@ const Sidebar = ({ avatar, roleLabel, userName, navItems, onLogout }: SidebarPro
 
   const renderMainSidebar = () => (
     <>
-      <img src="/src/assets/ireply.png" className="sidebar-logo" alt="" />
-
       <div className="profile">
-        <div className="avatar">
-          <img src="/src/assets/icon.webp" alt="User Avatar" />
+        <div className="profile-avatar">{getInitials()}</div>
+        <div className="profile-meta">
+          <p className="name">{user?.role_name ?? 'Loading...'}</p>
+          <p className="username">{(user?.first_name ?? 'user').toLowerCase()}</p>
         </div>
-
-        <p className="name">{user?.first_name ?? 'Loading...'}</p>
-
-        <button className="logout" onClick={handleLogout}>
-          Log Out
-        </button>
       </div>
 
       <nav className="menu">
@@ -176,67 +169,51 @@ const Sidebar = ({ avatar, roleLabel, userName, navItems, onLogout }: SidebarPro
         )}
 
         {hasPermission('View Attendance') && (
-          <NavLink to="/attendance" className={({ isActive }) => (isActive ? 'active' : '')}>
-            Attendance
+          <div className="dropdown">
+            <div
+              className={`dropdown-header ${isAttendanceRoute ? 'active' : ''}`}
+              onClick={() => setAttendanceOpen(!attendanceOpen)}
+            >
+              Attendance
+              <span className={`arrow ${attendanceOpen ? 'open' : ''}`}>▾</span>
+            </div>
+
+            {attendanceOpen && (
+              <div className="dropdown-content">
+                <NavLink to="/attendance" className={({ isActive }) => (isActive ? 'active' : '')}>
+                  My Attendance
+                </NavLink>
+                <NavLink to="/attendance">All Attendance</NavLink>
+                <NavLink to="/attendance">My Requests</NavLink>
+                <NavLink to="/attendance">My Filing Center</NavLink>
+                <NavLink to="/attendance">Team Request</NavLink>
+              </div>
+            )}
+          </div>
+        )}
+
+        {hasPermission('Set Attendance') && (
+          <NavLink to="/schedule" className={({ isActive }) => (isActive ? 'active' : '')}>
+            Schedule
           </NavLink>
         )}
 
-        {(hasPermission('View Employee List') || hasPermission('Set Attendance')) && (
-          <div className="dropdown">
-            <div
-              className={`dropdown-header ${isEmployeeRoute ? 'active' : ''}`}
-              onClick={() => setEmployeeOpen(!employeeOpen)}
-            >
-              Employee
-              <span className={`arrow ${employeeOpen ? 'open' : ''}`}>▼</span>
-            </div>
-
-            {employeeOpen && (
-              <div className="dropdown-content">
-                {hasPermission('Set Attendance') && (
-                  <NavLink to="/schedule" className={({ isActive }) => (isActive ? 'active' : '')}>
-                    Time In / Time Out
-                  </NavLink>
-                )}
-
-                {hasPermission('View Employee List') && (
-                  <NavLink to="/employee-list" className={({ isActive }) => (isActive ? 'active' : '')}>
-                    Employee List
-                  </NavLink>
-                )}
-              </div>
-            )}
-          </div>
+        {hasPermission('View Employee List') && (
+          <NavLink to="/employee-list" className={({ isActive }) => (isActive ? 'active' : '')}>
+            Employees
+          </NavLink>
         )}
 
-        {(hasPermission('View Employee List') || hasPermission('Access Control Panel')) && (
-          <div className="dropdown">
-            <div
-              className={`dropdown-header ${isManagementRoute ? 'active' : ''}`}
-              onClick={() => setManagementOpen(!managementOpen)}
-            >
-              Employee Management
-              <span className={`arrow ${managementOpen ? 'open' : ''}`}>▼</span>
-            </div>
-
-            {managementOpen && (
-              <div className="dropdown-content">
-                {hasPermission('View Employee List') && (
-                  <NavLink to="/employee-list" className={({ isActive }) => (isActive ? 'active' : '')}>
-                    Add / Edit Employee
-                  </NavLink>
-                )}
-
-                {hasPermission('Access Control Panel') && (
-                  <NavLink to="/ControlPanel" className={({ isActive }) => (isActive ? 'active' : '')}>
-                    Edit Permissions
-                  </NavLink>
-                )}
-              </div>
-            )}
-          </div>
+        {hasPermission('Access Control Panel') && (
+          <NavLink to="/ControlPanel" className={({ isActive }) => (isActive ? 'active' : '')}>
+            Control Panel
+          </NavLink>
         )}
       </nav>
+
+      <button className="logout" onClick={handleLogout}>
+        Log Out
+      </button>
     </>
   );
 
