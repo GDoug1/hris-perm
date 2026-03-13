@@ -126,6 +126,16 @@
   background: #e6f0ff;
 }
 
+
+.dropdown-header.active {
+  background: #1e90ff;
+  color: #fff;
+}
+
+.dropdown-header.active:hover {
+  background: #1c86ee;
+}
+
 /* Arrow animation */
 .arrow {
   font-size: 12px;
