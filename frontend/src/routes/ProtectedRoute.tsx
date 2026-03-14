@@ -56,7 +56,7 @@ const ProtectedRoute = ({
   if (loading) return null;
 
   if (!authorized) {
-    return <Navigate to="/MainDashboard" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return <>{children}</>;

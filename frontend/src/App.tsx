@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import Login from './pages/Login';
 import Schedule from './pages/Schedule';
@@ -36,6 +36,11 @@ function App() {
             <MainDashboard />
           </ProtectedRoute>
         }
+      />
+
+      <Route
+        path="/MainDashboard"
+        element={<Navigate to="/dashboard" replace />}
       />
 
       <Route

@@ -27,7 +27,7 @@ type SidebarProps = {
   roleLabel?: string;
   userName?: string;
   navItems?: SidebarNavItem[];
-  onLogout?: () => void;
+  onLogout?: () => void | Promise<void>;
 };
 
 const Sidebar = ({ avatar, roleLabel, userName, navItems, onLogout }: SidebarProps) => {
@@ -55,17 +55,19 @@ const Sidebar = ({ avatar, roleLabel, userName, navItems, onLogout }: SidebarPro
   }, [navigate]);
 
   const handleLogout = async () => {
-    if (onLogout) {
-      onLogout();
-      return;
+    try {
+      if (onLogout) {
+        await onLogout();
+        return;
+      }
+
+      await fetch('http://localhost/hris/backend/auth/logout.php', {
+        method: 'POST',
+        credentials: 'include',
+      });
+    } finally {
+      navigate('/', { replace: true });
     }
-
-    await fetch('http://localhost/hris/backend/auth/logout.php', {
-      method: 'POST',
-      credentials: 'include',
-    });
-
-    navigate('/', { replace: true });
   };
 
   const hasPermission = (permission: string) => {
@@ -211,7 +213,7 @@ const Sidebar = ({ avatar, roleLabel, userName, navItems, onLogout }: SidebarPro
         )}
       </nav>
 
-      <button className="logout" onClick={handleLogout}>
+      <button className="logout" type="button" onClick={handleLogout}>
         Log Out
       </button>
     </>
