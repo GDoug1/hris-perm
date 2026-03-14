@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import Login from './pages/Login';
 import Schedule from './pages/Schedule';
 import MainDashboard from './pages/MainDashboard';
-import Team from './pages/Team';
+import CoachDashboard from './pages/CoachDashboard';
 import Attendance from './pages/Attendance';
 import ProtectedRoute from './routes/ProtectedRoute';
 import EmployeeList from './pages/EmployeeList';
@@ -47,7 +47,7 @@ function App() {
         path="/team"
         element={
           <ProtectedRoute>
-            <Team />
+            <CoachDashboard />
           </ProtectedRoute>
         }
       />

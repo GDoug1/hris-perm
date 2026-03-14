@@ -1,15 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { apiFetch } from "../api/api";
 import { parseSqlDateTime, saveDashboardAttendance } from "../api/attendance";
-import DashboardSidebar from "../components/DashboardSidebar";
+import Sidebar from "../components/Navbar/Sidebar";
 import AttendanceHistoryHighlights from "../components/AttendanceHistoryHighlights";
 import MainDashboard from "./MainDashboard";
 import FilingCenterPanel from "../components/FilingCenterPanel";
 import DataPanel from "../components/DataPanel";
 import { buildRequestHighlights, fetchMyRequests, fetchTeamRequests, updateTeamRequestStatus } from "../api/requests";
-import useLiveDateTime from "../hooks/useLiveDateTime";
-import useCurrentUser from "../hooks/useCurrentUser";
-import { normalizeSchedule as normalizeAttendanceSchedule, parseDateValue, resolveAttendanceMainTag } from "../utils/attendanceTags";
+import useLiveDateTime from "../components/hooks/useLiveDateTime";
+import { normalizeSchedule as normalizeAttendanceSchedule, parseDateValue, resolveAttendanceMainTag } from "../components/utils/attendanceTags";
 
 
 const attendanceSortOptions = {
@@ -103,7 +102,7 @@ export default function CoachDashboard() {
   const [attendanceEditForm, setAttendanceEditForm] = useState({ timeInAt: "", timeOutAt: "", tag: "", note: "" });
   const [attendanceSaveError, setAttendanceSaveError] = useState("");
   const [isSavingAttendanceEdit, setIsSavingAttendanceEdit] = useState(false);
-  const [activeNav, setActiveNav] = useState("Dashboard");
+  const [activeNav, setActiveNav] = useState("Team");
   const [teamRequests, setTeamRequests] = useState([]);
   const [teamRequestsError, setTeamRequestsError] = useState("");
   const [requestActionLoadingId, setRequestActionLoadingId] = useState("");
@@ -118,26 +117,8 @@ export default function CoachDashboard() {
     }
   });
   const dateTimeLabel = useLiveDateTime();
-  const { user } = useCurrentUser();
   const attendanceNavItems = ["My Attendance", "Team Cluster Attendance", "My Requests", "My Filing Center", "Team Request"];
-  const [attendanceExpanded, setAttendanceExpanded] = useState(true);
   const isAttendanceView = activeNav === "Attendance" || attendanceNavItems.includes(activeNav);
-  const navItems = [
-    { label: "Dashboard", active: activeNav === "Dashboard", onClick: () => setActiveNav("Dashboard") },
-    { label: "Team", active: activeNav === "Team", onClick: () => setActiveNav("Team") },
-    {
-      label: "Attendance",
-      active: isAttendanceView,
-      expanded: attendanceExpanded,
-      onClick: () => setAttendanceExpanded(prev => !prev),
-      children: attendanceNavItems.map(label => ({
-        label,
-        active: (label === "My Attendance" && activeNav === "Attendance") || activeNav === label,
-        onClick: () => setActiveNav(label === "My Attendance" ? "Attendance" : label)
-      }))
-    },
-    { label: "Schedule", active: activeNav === "Schedule", onClick: () => setActiveNav("Schedule") }
-  ];
 
 
 
@@ -694,17 +675,6 @@ export default function CoachDashboard() {
       : "—",
     availabilityLabel: dashboardCluster ? "Available" : "Not available"
   }), [dashboardCluster, coachAttendanceTag, todayCoachSchedule]);
-
-  const handleLogout = async () => {
-    try {
-      await apiFetch("auth/logout.php", { method: "POST" });
-    } catch {
-      console.error("Logout failed", error);
-    } finally {
-      localStorage.removeItem("teamClusterUser");
-      window.location.href = "/login";
-    }
-  };
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -1438,13 +1408,7 @@ export default function CoachDashboard() {
 
   return (
     <div className="dashboard">
-      <DashboardSidebar
-        avatar="TC"
-        roleLabel="Team Coach"
-        userName={user?.fullname}
-        navItems={navItems}
-        onLogout={handleLogout}
-      />
+      <Sidebar />
 
       <main className="main">
         {activeNav === "Dashboard" ? (
