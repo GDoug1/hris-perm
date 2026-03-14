@@ -7,7 +7,6 @@ import {
   fetchTeamRequests,
   updateTeamRequestStatus,
 } from '../../api/requests';
-import '../../styles/attendance.css';
 
 export default function EmployeeRequest() {
   const [requests, setRequests] = useState([]);

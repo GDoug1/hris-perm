@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import Sidebar from '../../components/Navbar/Sidebar';
-import '../../styles/attendance.css';
 
 const links = [
   { to: '/attendance/my', label: 'My Attendance' },
@@ -19,11 +18,9 @@ export default function Team() {
           <h1>ATTENDANCE</h1>
         </div>
 
-        <p className="attendance-subtitle">Choose an attendance module.</p>
-
-        <div className="attendance-nav-grid">
+        <div className="attendance-table" style={{ display: 'grid', gap: '0.75rem' }}>
           {links.map((item) => (
-            <Link key={item.to} to={item.to} className="attendance-nav-link">
+            <Link key={item.to} to={item.to} className="view-btn" style={{ width: 'fit-content' }}>
               {item.label}
             </Link>
           ))}

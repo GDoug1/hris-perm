@@ -3,7 +3,6 @@ import Sidebar from '../../components/Navbar/Sidebar';
 import AttendanceHistoryHighlights from '../../components/AttendanceHistoryHighlights';
 import DataPanel from '../../components/DataPanel';
 import { buildRequestHighlights, fetchMyRequests } from '../../api/requests';
-import '../../styles/attendance.css';
 
 export default function MyRequest() {
   const [requests, setRequests] = useState([]);

@@ -1,6 +1,5 @@
 import Sidebar from '../../components/Navbar/Sidebar';
 import FilingCenterPanel from '../../components/FilingCenterPanel';
-import '../../styles/attendance.css';
 
 export default function MyFilingCenter() {
   return (
