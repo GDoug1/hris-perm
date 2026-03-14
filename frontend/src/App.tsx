@@ -4,7 +4,7 @@ import Login from './pages/Login';
 import Schedule from './pages/Schedule';
 import MainDashboard from './pages/MainDashboard';
 import CoachDashboard from './pages/CoachDashboard';
-import Team from './pages/attendance/Team';
+import Team from './pages/Team';
 import MyAttendance from './pages/attendance/MyAttendance';
 import AllAttendance from './pages/attendance/AllAttendance';
 import MyRequest from './pages/attendance/MyRequest';

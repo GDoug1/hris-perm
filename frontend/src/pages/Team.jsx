@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Sidebar from '../../components/Navbar/Sidebar';
+import Sidebar from '../components/Navbar/Sidebar';
 
 const links = [
   { to: '/attendance/my', label: 'My Attendance' },
