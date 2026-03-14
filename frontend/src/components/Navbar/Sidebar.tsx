@@ -35,7 +35,7 @@ const Sidebar = ({ avatar, roleLabel, userName, navItems, onLogout }: SidebarPro
   const location = useLocation();
   const [user, setUser] = useState<User | null>(null);
 
-  const isAttendanceRoute = location.pathname === '/attendance';
+  const isAttendanceRoute = location.pathname.startsWith('/attendance');
   const [attendanceOpen, setAttendanceOpen] = useState(isAttendanceRoute);
 
   useEffect(() => {
@@ -182,13 +182,13 @@ const Sidebar = ({ avatar, roleLabel, userName, navItems, onLogout }: SidebarPro
 
             {attendanceOpen && (
               <div className="dropdown-content">
-                <NavLink to="/attendance" className={({ isActive }) => (isActive ? 'active' : '')}>
+                <NavLink to="/attendance/my" className={({ isActive }) => (isActive ? 'active' : '')}>
                   My Attendance
                 </NavLink>
-                <NavLink to="/attendance">All Attendance</NavLink>
-                <NavLink to="/attendance">My Requests</NavLink>
-                <NavLink to="/attendance">My Filing Center</NavLink>
-                <NavLink to="/attendance">Team Request</NavLink>
+                <NavLink to="/attendance/all" className={({ isActive }) => (isActive ? 'active' : '')}>All Attendance</NavLink>
+                <NavLink to="/attendance/my-request" className={({ isActive }) => (isActive ? 'active' : '')}>My Requests</NavLink>
+                <NavLink to="/attendance/my-filing-center" className={({ isActive }) => (isActive ? 'active' : '')}>My Filing Center</NavLink>
+                <NavLink to="/attendance/employee-request" className={({ isActive }) => (isActive ? 'active' : '')}>Team Request</NavLink>
               </div>
             )}
           </div>
