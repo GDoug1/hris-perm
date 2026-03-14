@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import Login from './pages/Login';
 import Schedule from './pages/Schedule';
 import MainDashboard from './pages/MainDashboard';
-import CoachDashboard from './pages/CoachDashboard';
 import Team from './pages/Team';
+import Attendance from './pages/Attendance';
 import MyAttendance from './pages/attendance/MyAttendance';
 import AllAttendance from './pages/attendance/AllAttendance';
 import MyRequest from './pages/attendance/MyRequest';
@@ -52,7 +52,7 @@ function App() {
         path="/team"
         element={
           <ProtectedRoute>
-            <CoachDashboard />
+            <Team />
           </ProtectedRoute>
         }
       />
@@ -61,7 +61,7 @@ function App() {
         path="/attendance"
         element={
           <ProtectedRoute>
-            <Team />
+            <Attendance />
           </ProtectedRoute>
         }
       />
