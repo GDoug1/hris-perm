@@ -4,7 +4,12 @@ import Login from './pages/Login';
 import Schedule from './pages/Schedule';
 import MainDashboard from './pages/MainDashboard';
 import CoachDashboard from './pages/CoachDashboard';
-import Attendance from './pages/Attendance';
+import Team from './pages/attendance/Team';
+import MyAttendance from './pages/attendance/MyAttendance';
+import AllAttendance from './pages/attendance/AllAttendance';
+import MyRequest from './pages/attendance/MyRequest';
+import MyFilingCenter from './pages/attendance/MyFilingCenter';
+import EmployeeRequest from './pages/attendance/EmployeeRequest';
 import ProtectedRoute from './routes/ProtectedRoute';
 import EmployeeList from './pages/EmployeeList';
 import ControlPanel from './pages/ControlPanel';
@@ -56,7 +61,52 @@ function App() {
         path="/attendance"
         element={
           <ProtectedRoute>
-            <Attendance />
+            <Team />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/attendance/my"
+        element={
+          <ProtectedRoute>
+            <MyAttendance />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/attendance/all"
+        element={
+          <ProtectedRoute>
+            <AllAttendance />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/attendance/my-request"
+        element={
+          <ProtectedRoute>
+            <MyRequest />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/attendance/my-filing-center"
+        element={
+          <ProtectedRoute>
+            <MyFilingCenter />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/attendance/employee-request"
+        element={
+          <ProtectedRoute>
+            <EmployeeRequest />
           </ProtectedRoute>
         }
       />
