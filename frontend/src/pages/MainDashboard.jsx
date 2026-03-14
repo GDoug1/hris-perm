@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import "../styles/MainDashboard.css";
+import Sidebar from "../components/Navbar/Sidebar";
 
 function DashboardHeader({ headerTime, headerDate }) {
   return (
@@ -300,49 +301,53 @@ export default function MainDashboard({
   };
 
   return (
-    <>
-      <DashboardHeader
-        headerTime={now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}
-        headerDate={now.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })}
-      />
+    <div className="app-shell">
+      <Sidebar />
+
+      <main className="content">
+        <DashboardHeader
+          headerTime={now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}
+          headerDate={now.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })}
+        />
 
       <div className={`dashboard-grid ${showMemberStatusCard ? "has-member-status" : "no-member-status"}`}>
-        <TimeCard
-          counterDisplay={counterDisplay}
-          hasActiveTimeIn={hasActiveTimeIn}
-          onToggleTimeIn={onToggleTimeIn}
-          canToggleTimeIn={canToggleTimeIn}
-          hasCompletedShift={hasCompletedShift}
-        />
-        <AnnouncementCard canEdit={canEditCards} />
-        <ShiftCard schedule={schedule} dashboardMeta={dashboardMeta} />
-        <CalendarCard calendarData={calendarData} />
-        <HolidayCard canEdit={canEditCards} />
-        <SummaryCard timeInStart={activeTimeIn} totalHours={totalHours} dashboardMeta={dashboardMeta} />
-        {showMemberStatusCard ? <MemberStatusCard /> : null}
-      </div>
+          <TimeCard
+            counterDisplay={counterDisplay}
+            hasActiveTimeIn={hasActiveTimeIn}
+            onToggleTimeIn={onToggleTimeIn}
+            canToggleTimeIn={canToggleTimeIn}
+            hasCompletedShift={hasCompletedShift}
+          />
+          <AnnouncementCard canEdit={canEditCards} />
+          <ShiftCard schedule={schedule} dashboardMeta={dashboardMeta} />
+          <CalendarCard calendarData={calendarData} />
+          <HolidayCard canEdit={canEditCards} />
+          <SummaryCard timeInStart={activeTimeIn} totalHours={totalHours} dashboardMeta={dashboardMeta} />
+          {showMemberStatusCard ? <MemberStatusCard /> : null}
+        </div>
 
-      {isTimeOutConfirmOpen ? (
-        <div className="time-out-modal-backdrop" role="presentation">
-          <div
-            className="time-out-modal"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="time-out-confirm-title"
-          >
-            <h3 id="time-out-confirm-title">Confirm Time Out</h3>
-            <p>Are you sure you want to time out now?</p>
-            <div className="time-out-modal-actions">
-              <button type="button" className="time-out-cancel-btn" onClick={() => setIsTimeOutConfirmOpen(false)}>
-                Cancel
-              </button>
-              <button type="button" className="time-out-confirm-btn" onClick={handleConfirmTimeOut}>
-                Confirm Time Out
-              </button>
+        {isTimeOutConfirmOpen ? (
+          <div className="time-out-modal-backdrop" role="presentation">
+            <div
+              className="time-out-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="time-out-confirm-title"
+            >
+              <h3 id="time-out-confirm-title">Confirm Time Out</h3>
+              <p>Are you sure you want to time out now?</p>
+              <div className="time-out-modal-actions">
+                <button type="button" className="time-out-cancel-btn" onClick={() => setIsTimeOutConfirmOpen(false)}>
+                  Cancel
+                </button>
+                <button type="button" className="time-out-confirm-btn" onClick={handleConfirmTimeOut}>
+                  Confirm Time Out
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      ) : null}
-    </>
+        ) : null}
+      </main>
+    </div>
   );
 }
